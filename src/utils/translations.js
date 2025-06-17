@@ -26,7 +26,7 @@ export const t = (key) => {
     // Apps
     operatingSystems: "سیستم‌عامل‌ها",
     download: "دانلود",
-    configuration: "پیکربندی",
+    configuration: "افزودن به برنامه",
     watchVideo: "مشاهده ویدیو",
     free: "رایگان",
     ad: "تبلیغات",
