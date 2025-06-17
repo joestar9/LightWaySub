@@ -13,8 +13,8 @@ import {
   X,
   Plus,
 } from "lucide-react";
-import TutorialModal from "./TutorialModal";
 import { t } from "../utils/translations";
+import osData from "../assets/os.json";
 
 const getOsIcon = (osName) => {
   const icons = {
@@ -229,30 +229,8 @@ OsSection.propTypes = {
 const Apps = ({ subLink }) => {
   const [operatingSystems, setOperatingSystems] = useState([]);
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalData, setModalData] = useState(null);
-
-  const handleModalOpen = (app) => {
-    setModalData({
-      title: app.name,
-      videoLink: app.videoLink,
-      tutorialSteps: app.tutorialSteps,
-    });
-    setModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setModalOpen(false);
-    setModalData(null);
-  };
-
   useEffect(() => {
-    fetch(
-      import.meta.env.VITE_JSON_APPS_URL ||
-        "https://raw.githubusercontent.com/MatinDehghanian/public-assets/refs/heads/main/json/os.json"
-    )
-      .then((response) => response.json())
-      .then((data) => setOperatingSystems(data.operatingSystems));
+    setOperatingSystems(osData.operatingSystems || []);
   }, []);
 
   return (
@@ -269,23 +247,11 @@ const Apps = ({ subLink }) => {
         <CardContent className="p-5 sm:p-6">
           <div className="space-y-4 sm:space-y-5">
             {operatingSystems.map((os, index) => (
-              <OsSection
-                key={index}
-                os={os}
-                t={t}
-                subLink={subLink}
-                onTutorialOpen={handleModalOpen}
-              />
+              <OsSection key={index} os={os} t={t} subLink={subLink} />
             ))}
           </div>
         </CardContent>
       </Card>
-
-      <TutorialModal
-        open={modalOpen}
-        handleClose={handleModalClose}
-        data={modalData}
-      />
     </>
   );
 };
