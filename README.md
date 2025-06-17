@@ -48,9 +48,6 @@ npm run dev
 ## Environment Variables
 
 ```env
-VITE_BRAND_NAME=Your Brand Name
-VITE_LOGO_SRC=https://your-logo-url.com/logo.svg
-VITE_PANEL_DOMAIN=https://your-panel-domain.com
 VITE_SUPPORT_URL=https://t.me/YourSupport
 VITE_JSON_APPS_URL=https://your-apps-json-url.com/os.json
 VITE_OFF_SECTIONS={"appsBox":true,"logoBox":true,"timeBox":true,"usageBox":true,"userBox":true,"supportBox":true,"configs":true}
