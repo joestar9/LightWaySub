@@ -75,33 +75,33 @@ const UserBox = ({ data, subLink }) => {
   return (
     <>
       <Card className="w-full">
-        <CardContent className="p-6">
-          <div className="flex items-start gap-4">
+        <CardContent className="p-5 sm:p-6">
+          <div className="flex items-start gap-4 sm:gap-4">
             {/* User Icon */}
             <div className="flex-shrink-0 p-2">
-              <User className="h-12 w-12 text-primary" />
+              <User className="h-14 w-14 sm:h-12 sm:w-12 text-primary" />
             </div>
 
             {/* User Info */}
             <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-medium text-foreground truncate">
+              <div className="flex items-center justify-between mb-4 sm:mb-4">
+                <h3 className="text-xl sm:text-lg font-medium text-foreground truncate">
                   {data?.username}
                 </h3>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleQrModalOpen}
-                  className="flex-shrink-0"
+                  className="flex-shrink-0 h-12 w-12 sm:h-10 sm:w-auto px-3 sm:px-3"
                 >
-                  <QrCode className="h-4 w-4" />
+                  <QrCode className="h-5 w-5" />
                 </Button>
               </div>
 
               {/* Status and Support Buttons */}
-              <div className="flex gap-3">
+              <div className="flex gap-3 sm:gap-3">
                 <Button
-                  className={`flex-1 ${statusColors.bg} ${statusColors.text} font-medium text-sm`}
+                  className={`flex-1 ${statusColors.bg} ${statusColors.text} font-medium text-base sm:text-base py-3 sm:py-2.5`}
                 >
                   {t(`status.${statusData}`)}
                 </Button>
@@ -114,10 +114,11 @@ const UserBox = ({ data, subLink }) => {
                           "https://t.me/YourID"
                       )
                     }
-                    className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium text-sm"
+                    className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium text-base sm:text-base py-3 sm:py-2.5"
                   >
-                    <MessageCircle className="h-4 w-4 me-2" />
-                    {t("support")}
+                    <MessageCircle className="h-5 w-5 me-2" />
+                    <span className="hidden sm:inline">{t("support")}</span>
+                    <span className="sm:hidden">پشتیبانی</span>
                   </Button>
                 )}
               </div>

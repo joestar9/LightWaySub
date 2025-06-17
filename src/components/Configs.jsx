@@ -37,18 +37,18 @@ const Configs = ({ title, configs, isFirst }) => {
     <>
       <Card className={`w-full ${isFirst ? "mt-6" : ""}`}>
         <CardHeader
-          className="cursor-pointer hover:bg-muted/50 transition-colors"
+          className="cursor-pointer hover:bg-muted/50 transition-colors p-5 sm:p-6"
           onClick={() => setIsExpanded(!isExpanded)}
         >
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 sm:gap-3">
               <div className="p-2 bg-primary rounded-lg">
-                <Globe className="h-5 w-5 text-primary-foreground" />
+                <Globe className="h-5 w-5 sm:h-5 sm:w-5 text-primary-foreground" />
               </div>
-              <CardTitle>{title}</CardTitle>
+              <CardTitle className="text-lg sm:text-lg">{title}</CardTitle>
             </div>
             <ChevronDown
-              className={`h-5 w-5 transition-transform ${
+              className={`h-5 w-5 sm:h-5 sm:w-5 transition-transform ${
                 isExpanded ? "rotate-180" : ""
               }`}
             />
@@ -56,42 +56,44 @@ const Configs = ({ title, configs, isFirst }) => {
         </CardHeader>
 
         {isExpanded && (
-          <CardContent className="pt-0">
+          <CardContent className="pt-0 px-5 sm:px-6 pb-5 sm:pb-6">
             <div className="space-y-3">
               {filteredLinks?.map((config, index) => {
                 const title = extractNameFromConfigURL(config);
                 return (
                   <div
                     key={index}
-                    className="flex items-center justify-between p-3 rounded-lg border bg-card hover:bg-muted/50 transition-colors cursor-pointer"
+                    className="flex items-center justify-between p-4 sm:p-4 rounded-lg border bg-card hover:bg-muted/50 transition-colors cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleOpen(title, filteredLinks?.[index], index);
                     }}
                   >
-                    <span className="font-medium truncate flex-1 me-3">
+                    <span className="font-medium truncate flex-1 me-3 sm:me-3 text-base sm:text-base">
                       {title}
                     </span>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 sm:gap-2">
                       <Button
                         variant="outline"
                         size="sm"
+                        className="h-10 w-10 sm:h-9 sm:w-auto px-3 sm:px-3"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleOpen(title, filteredLinks?.[index], index);
                         }}
                       >
-                        <QrCode className="h-4 w-4" />
+                        <QrCode className="h-5 w-5" />
                       </Button>
                       <Button
                         variant="outline"
                         size="sm"
+                        className="h-10 w-10 sm:h-9 sm:w-auto px-3 sm:px-3"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleCopyToClipboard(filteredLinks?.[index], index);
                         }}
                       >
-                        <Copy className="h-4 w-4" />
+                        <Copy className="h-5 w-5" />
                       </Button>
                     </div>
                   </div>
@@ -102,7 +104,7 @@ const Configs = ({ title, configs, isFirst }) => {
                 onClick={() =>
                   handleCopyToClipboard(filteredLinks.join("\n"), -1, t)
                 }
-                className="w-full"
+                className="w-full py-3 sm:py-3 text-base sm:text-base"
                 variant="outline"
               >
                 {t("copyAll")}

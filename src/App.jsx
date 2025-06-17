@@ -102,7 +102,7 @@ function App() {
 
   return (
     <div
-      className="min-h-screen bg-background text-foreground transition-colors duration-200"
+      className="min-h-screen bg-background text-foreground transition-colors duration-200 text-base sm:text-base"
       dir="rtl"
     >
       <Helmet>
@@ -111,14 +111,18 @@ function App() {
           name="description"
           content="Powered by https://github.com/MatinDehghanian"
         />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Helmet>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-6 py-3 sm:py-8">
         <div className="mx-auto max-w-2xl">
           {loading ? (
             <div className="flex h-96 items-center justify-center">
               <ClipLoader
-                size={50}
+                size={60}
                 color="hsl(var(--primary))"
                 loading={loading}
               />
@@ -128,12 +132,11 @@ function App() {
               <Suspense
                 fallback={
                   <div className="flex h-96 items-center justify-center">
-                    <ClipLoader size={30} color="hsl(var(--primary))" />
+                    <ClipLoader size={40} color="hsl(var(--primary))" />
                   </div>
                 }
               >
-                <div className="space-y-6">
-
+                <div className="space-y-5 sm:space-y-6">
                   {isOffSections.userBox && (
                     <UserBox
                       data={data}

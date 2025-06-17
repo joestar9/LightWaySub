@@ -18,11 +18,11 @@ import { t } from "../utils/translations";
 
 const getOsIcon = (osName) => {
   const icons = {
-    Windows: <Monitor className="h-6 w-6" />,
-    Android: <Smartphone className="h-6 w-6" />,
-    iOS: <Apple className="h-6 w-6" />,
-    Linux: <Code className="h-6 w-6" />,
-    default: <X className="h-6 w-6" />,
+    Windows: <Monitor className="h-6 w-6 sm:h-6 sm:w-6" />,
+    Android: <Smartphone className="h-6 w-6 sm:h-6 sm:w-6" />,
+    iOS: <Apple className="h-6 w-6 sm:h-6 sm:w-6" />,
+    Linux: <Code className="h-6 w-6 sm:h-6 sm:w-6" />,
+    default: <X className="h-6 w-6 sm:h-6 sm:w-6" />,
   };
   return icons[osName] || icons.default;
 };
@@ -39,23 +39,23 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
   return (
     <Card className="mb-4">
       <CardHeader
-        className="cursor-pointer hover:bg-muted/50 transition-colors"
+        className="cursor-pointer hover:bg-muted/50 transition-colors p-5 sm:p-6"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 sm:gap-3">
             <img
               src={app.logo}
               alt={`${app.name} logo`}
-              className="w-8 h-8 rounded-lg object-contain"
+              className="w-9 h-9 sm:w-8 sm:h-8 rounded-lg object-contain"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = "https://via.placeholder.com/32x32?text=App";
               }}
             />
             <div>
-              <h3 className="font-medium">{app.name}</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-medium text-base sm:text-base">{app.name}</h3>
+              <p className="text-sm sm:text-sm text-muted-foreground">
                 {app.faDescription || app.description}
               </p>
             </div>
@@ -66,10 +66,10 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
               size="sm"
               className={
                 app?.price === "0"
-                  ? "bg-green-100 text-green-800 hover:bg-green-200"
+                  ? "bg-green-100 text-green-800 hover:bg-green-200 text-sm sm:text-sm"
                   : app?.isAd
-                  ? "bg-yellow-100 text-yellow-800 hover:bg-yellow-200"
-                  : "bg-blue-100 text-blue-800 hover:bg-blue-200"
+                  ? "bg-yellow-100 text-yellow-800 hover:bg-yellow-200 text-sm sm:text-sm"
+                  : "bg-blue-100 text-blue-800 hover:bg-blue-200 text-sm sm:text-sm"
               }
             >
               {app.price === "0"
@@ -79,7 +79,7 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
                 : `${app.price} $`}
             </Button>
             <ChevronDown
-              className={`h-4 w-4 transition-transform ${
+              className={`h-5 w-5 transition-transform ${
                 isExpanded ? "rotate-180" : ""
               }`}
             />
@@ -88,15 +88,15 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
       </CardHeader>
 
       {isExpanded && (
-        <CardContent className="pt-0">
-          <div className="flex flex-col gap-5 my-3">
+        <CardContent className="pt-0 px-5 sm:px-6 pb-5 sm:pb-6">
+          <div className="flex flex-col gap-4 sm:gap-5 my-3">
             {app.downloadLink && !app?.isAd && (
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full py-3 sm:py-3 text-base sm:text-base"
                 onClick={() => window.open(app.downloadLink, "_blank")}
               >
-                <Download className="h-4 w-4 me-2" />
+                <Download className="h-5 w-5 me-2" />
                 {t("download")}
               </Button>
             )}
@@ -104,10 +104,10 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
             {app?.isAd && (
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full py-3 sm:py-3 text-base sm:text-base"
                 onClick={() => window.open(app.downloadLink, "_blank")}
               >
-                <Download className="h-4 w-4 me-2" />
+                <Download className="h-5 w-5 me-2" />
                 {app.adBtnText}
               </Button>
             )}
@@ -115,7 +115,7 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
             {app.configLink && (
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full py-3 sm:py-3 text-base sm:text-base"
                 onClick={() => {
                   if (app.name === "Shadowrocket") {
                     openShadowrocketURL(subLink);
@@ -127,7 +127,7 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
                   }
                 }}
               >
-                <Plus className="h-4 w-4 me-2" />
+                <Plus className="h-5 w-5 me-2" />
                 {t("configuration")}
               </Button>
             )}
@@ -135,10 +135,10 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
             {app.tutorialSteps?.length > 0 && (
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full py-3 sm:py-3 text-base sm:text-base"
                 onClick={() => onTutorialOpen(app)}
               >
-                <Play className="h-4 w-4 me-2" />
+                <Play className="h-5 w-5 me-2" />
                 {t("watchVideo")}
               </Button>
             )}
@@ -149,22 +149,42 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
   );
 };
 
+AppCard.propTypes = {
+  app: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    logo: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    faDescription: PropTypes.string,
+    price: PropTypes.string,
+    isAd: PropTypes.bool,
+    downloadLink: PropTypes.string,
+    configLink: PropTypes.string,
+    adBtnText: PropTypes.string,
+    tutorialSteps: PropTypes.array,
+  }).isRequired,
+  t: PropTypes.func.isRequired,
+  subLink: PropTypes.string,
+  onTutorialOpen: PropTypes.func.isRequired,
+};
+
 const OsSection = ({ os, t, subLink, onTutorialOpen }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <Card className="mb-4">
       <CardHeader
-        className="cursor-pointer hover:bg-muted/50 transition-colors"
+        className="cursor-pointer hover:bg-muted/50 transition-colors p-5 sm:p-6"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 sm:gap-3">
             {getOsIcon(os.engName)}
-            <h3 className="font-medium">{os.name || os.engName}</h3>
+            <h3 className="font-medium text-base sm:text-base">
+              {os.name || os.engName}
+            </h3>
           </div>
           <ChevronDown
-            className={`h-4 w-4 transition-transform ${
+            className={`h-5 w-5 transition-transform ${
               isExpanded ? "rotate-180" : ""
             }`}
           />
@@ -172,8 +192,8 @@ const OsSection = ({ os, t, subLink, onTutorialOpen }) => {
       </CardHeader>
 
       {isExpanded && (
-        <CardContent className="pt-0">
-          <div className="space-y-4 my-4">
+        <CardContent className="pt-0 px-5 sm:px-6 pb-5 sm:pb-6">
+          <div className="space-y-4 sm:space-y-4 my-3 sm:my-4">
             {os.apps.map((app, appIndex) => (
               <AppCard
                 key={appIndex}
@@ -188,6 +208,30 @@ const OsSection = ({ os, t, subLink, onTutorialOpen }) => {
       )}
     </Card>
   );
+};
+
+OsSection.propTypes = {
+  os: PropTypes.shape({
+    name: PropTypes.string,
+    engName: PropTypes.string.isRequired,
+    apps: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        logo: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        faDescription: PropTypes.string,
+        price: PropTypes.string,
+        isAd: PropTypes.bool,
+        downloadLink: PropTypes.string,
+        configLink: PropTypes.string,
+        adBtnText: PropTypes.string,
+        tutorialSteps: PropTypes.array,
+      })
+    ).isRequired,
+  }).isRequired,
+  t: PropTypes.func.isRequired,
+  subLink: PropTypes.string,
+  onTutorialOpen: PropTypes.func.isRequired,
 };
 
 const Apps = ({ subLink }) => {
@@ -222,16 +266,16 @@ const Apps = ({ subLink }) => {
   return (
     <>
       <Card className="w-full">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+        <CardHeader className="p-5 sm:p-6">
+          <CardTitle className="flex items-center gap-2 text-lg sm:text-lg">
             <div className="p-2 bg-primary rounded-lg">
-              <Monitor className="h-5 w-5 text-primary-foreground" />
+              <Monitor className="h-5 w-5 sm:h-5 sm:w-5 text-primary-foreground" />
             </div>
             {t("operatingSystems")}
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-5">
+        <CardContent className="p-5 sm:p-6">
+          <div className="space-y-4 sm:space-y-5">
             {operatingSystems.map((os, index) => (
               <OsSection
                 key={index}

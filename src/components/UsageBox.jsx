@@ -59,13 +59,13 @@ const UsageBox = ({ type, value, total, remaining }) => {
 
   return (
     <Card className="w-full">
-      <CardContent className="p-6">
-        <div className="flex items-center gap-6">
+      <CardContent className="p-5 sm:p-6">
+        <div className="flex items-center gap-5 sm:gap-6">
           {/* Progress Circle */}
           <div className="flex-shrink-0">
-            <div className="relative w-20 h-20">
+            <div className="relative w-20 h-20 sm:w-20 sm:h-20">
               <svg
-                className="w-20 h-20 transform -rotate-90"
+                className="w-20 h-20 sm:w-20 sm:h-20 transform -rotate-90"
                 viewBox="0 0 36 36"
               >
                 <path
@@ -86,22 +86,29 @@ const UsageBox = ({ type, value, total, remaining }) => {
                 />
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-sm font-bold">{roundedValue}%</span>
+                <span className="text-base sm:text-sm font-bold">
+                  {roundedValue}%
+                </span>
               </div>
             </div>
           </div>
 
           {/* Remaining Info */}
           <div className="flex-1 text-center">
-            <p className="text-xs text-muted-foreground font-light mb-1">
+            <p className="text-sm sm:text-sm text-muted-foreground font-light mb-2">
               {title}
             </p>
-            <p className={`text-xl font-bold ${getTextColor(value)}`}>
+            <p
+              className={`text-2xl sm:text-xl font-bold ${getTextColor(value)}`}
+            >
               {remainingParsed.text === t("infinity")
                 ? remainingParsed.text
                 : remainingParsed.number}
             </p>
-            <p dir="ltr" className="text-sm text-muted-foreground font-light">
+            <p
+              dir="ltr"
+              className="text-sm sm:text-sm text-muted-foreground font-light"
+            >
               {remainingParsed.text}
             </p>
           </div>
@@ -109,15 +116,15 @@ const UsageBox = ({ type, value, total, remaining }) => {
           {/* Total Info (only for usage type) */}
           {type === "usage" && (
             <div className="flex-1 text-center">
-              <p className="text-xs text-muted-foreground font-light mb-1">
+              <p className="text-sm sm:text-sm text-muted-foreground font-light mb-2">
                 {totaltitle}
               </p>
-              <p className="text-xl font-bold">
+              <p className="text-2xl sm:text-xl font-bold">
                 {totalParsed.text === t("infinity")
                   ? totalParsed.text
                   : totalParsed.number}
               </p>
-              <p className="text-sm text-muted-foreground font-light">
+              <p className="text-sm sm:text-sm text-muted-foreground font-light">
                 {totalParsed.text}
               </p>
             </div>
@@ -125,8 +132,8 @@ const UsageBox = ({ type, value, total, remaining }) => {
         </div>
 
         {/* Linear Progress Bar */}
-        <div className="mt-4">
-          <Progress value={value} className="h-2" />
+        <div className="mt-4 sm:mt-4">
+          <Progress value={value} className="h-3 sm:h-3" />
         </div>
       </CardContent>
     </Card>
