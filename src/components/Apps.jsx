@@ -5,13 +5,13 @@ import { Button } from "./ui/button";
 import {
   ChevronDown,
   Download,
-  Plus,
   Play,
   Monitor,
   Smartphone,
   Apple,
   Code,
   X,
+  Plus,
 } from "lucide-react";
 import TutorialModal from "./TutorialModal";
 import { t } from "../utils/translations";
@@ -55,9 +55,6 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
             />
             <div>
               <h3 className="font-medium text-base sm:text-base">{app.name}</h3>
-              <p className="text-sm sm:text-sm text-muted-foreground">
-                {app.faDescription || app.description}
-              </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -89,6 +86,9 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
 
       {isExpanded && (
         <CardContent className="pt-0 px-5 sm:px-6 pb-5 sm:pb-6">
+          <p className="text-sm sm:text-sm text-muted-foreground mb-3">
+            {app.faDescription || app.description}
+          </p>
           <div className="flex flex-col gap-4 sm:gap-5 my-3">
             {app.downloadLink && !app?.isAd && (
               <Button
@@ -101,31 +101,23 @@ const AppCard = ({ app, t, subLink, onTutorialOpen }) => {
               </Button>
             )}
 
-            {app?.isAd && (
-              <Button
-                variant="outline"
-                className="w-full py-3 sm:py-3 text-base sm:text-base"
-                onClick={() => window.open(app.downloadLink, "_blank")}
+            {app.configLink && (
+              <a
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full py-3 sm:py-3 text-base sm:text-base"
+                href={app.configLink.replace("{url}", subLink)}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Download className="h-5 w-5 me-2" />
-                {app.adBtnText}
-              </Button>
+                <Plus className="h-5 w-5 me-2" />
+                {t("configuration")}
+              </a>
             )}
 
-            {app.configLink && (
+            {app.name === "Shadowrocket" && (
               <Button
                 variant="outline"
                 className="w-full py-3 sm:py-3 text-base sm:text-base"
-                onClick={() => {
-                  if (app.name === "Shadowrocket") {
-                    openShadowrocketURL(subLink);
-                  } else {
-                    window.open(
-                      app.configLink.replace("{url}", subLink),
-                      "_blank"
-                    );
-                  }
-                }}
+                onClick={() => openShadowrocketURL(subLink)}
               >
                 <Plus className="h-5 w-5 me-2" />
                 {t("configuration")}
